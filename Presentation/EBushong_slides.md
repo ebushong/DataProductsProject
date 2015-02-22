@@ -1,0 +1,44 @@
+Ozone Prediction Tool
+========================================================
+transition: rotate
+author: E Bushong
+date: Feb. 22, 2015
+
+Why is ozone level important?
+========================================================
+incremental: true
+
+<br>
+- [Ozone] (http://en.wikipedia.org/wiki/Ozone) levels are largely a reflection of fossil fuel air pollution
+- Ozone is created when UV light interacts with these pollutants
+- High ozone levels are harmful to the respiratory system and lead to disease
+
+Predicting Ozone Levels
+========================================================
+<br>
+A [tool] (https://ebushong.shinyapps.io/Project) has been developed that uses machine learning to predict ozone levels in New York City based on three environmental factors (solar radiation, temperature, and wind speed).  The data used to create the prediction model comes from the Elements of Statistical Learning package created by Trevor Hastie, Robert Tibshirani and Jerome Friedman.  
+<br>
+<br>
+<small><font color="red">Caveat!</font>
+This data was collected during the summer of 1973 and is not valid for other locations and other time points; however, it probably does reveal generally valid relationships between ozone levels and the other three environmental factors.</small>
+
+
+
+How Was the Prediction Model Created?
+========================================================
+type: prompt
+![plot of chunk unnamed-chunk-2](EBushong_slides-figure/unnamed-chunk-2-1.png) 
+***
+<small>The dataset is rather small, consisting of only 111 observations.  As seen in the plot, there is no clear linear relationship between ozone and any of the three environmental factors.  A generalized additive model with splines was used to model the relationship.  Following normalization of the data and using 10-fold cross validation, a GAM model was optimized to minimize root mean squared error. This resulted in a model with 3 degrees of freedom for spline smoothing of each variable.</small>
+
+How Well Does the Model Perform?
+========================================================
+type: prompt
+All three of the environmental factors are significant for predicting ozone levels, with very low p values for all three environmental factors.
+
+- Wind Speed &nbsp;&nbsp;&nbsp;<font color="blue">p = 4.08 &times; 10<sup>-20</sup></font>
+- Temperature &nbsp;&nbsp;&nbsp;<font color="blue">p = 2.61 &times; 10<sup>-12</sup></font>
+- Solar Radiation &nbsp;&nbsp;&nbsp;<font color="blue">p = 7.54 &times; 10<sup>-4</sup></font>
+
+<br>
+Following the model optimization proceedure in caret using cross-validation, the $R^2$ value for the final model was <font color="blue">0.739</font>.
